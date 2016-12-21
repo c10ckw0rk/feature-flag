@@ -6,6 +6,7 @@
   "scripts": {
     "test": "karma start karma.conf.js"
   },
+  "repository": "https://github.com/c10ckw0rk/feature-flag.git",
   "author": "c10ckw0rk",
   "license": "ISC",
   "devDependencies": {
