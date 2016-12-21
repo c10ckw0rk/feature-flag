@@ -7,6 +7,18 @@ module.exports = function (config) {
         // base path that will be used to resolve all patterns (eg. files, exclude)
         basePath: '.',
 
+        preprocessors: {
+            'lib/*.js': ['babel'],
+        },
+
+        babelPreprocessor: {
+            options: {
+                presets: ['es2015'],
+                sourceMap: 'inline',
+                plugins: ['transform-es2015-modules-umd']
+            }
+        },
+
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter

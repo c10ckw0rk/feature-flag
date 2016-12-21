@@ -1,10 +1,12 @@
-/* global it, describe, expect, beforeEach, $, Cookies, FeatureFlag, beforeAll, afterEach */
+/* global it, describe, expect, beforeEach, $, Cookies, FeatureFlagons, beforeAll, afterEach */
+
+const FF = FeatureFlagons.default;
 
 describe('Feature Flag loads different css and js files', () => {
 
     beforeEach(() => {
 
-        window.featureFlag = new FeatureFlag('test-feature', {
+        window.featureFlag = new FF('test-feature', {
             variants: {
                 default: {
                     css: '/base/test/mocks/default.css',
@@ -60,7 +62,7 @@ describe('Feature Flag loads different css and js files', () => {
 
         setTimeout(() => {
 
-            window.featureFlag = new FeatureFlag('test-feature', {
+            window.featureFlag = new FF('test-feature', {
                 variants: {
                     default: {
                         css: '/base/test/mocks/default.css',
@@ -117,7 +119,7 @@ describe('Feature Flag loads different css and js files', () => {
 
         const beforePath = window.featureFlag.readStorage().css;
 
-        window.featureFlag = new FeatureFlag('test-feature', {
+        window.featureFlag = new FF('test-feature', {
             variants: {
                 default: {
                     css: '/base/test/mocks/default.css',
