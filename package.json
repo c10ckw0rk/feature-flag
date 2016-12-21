@@ -1,0 +1,20 @@
+{
+  "name": "feature-flag",
+  "version": "1.0.0",
+  "description": "Simple script that loads different js and css based on a percentage.",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "karma start karma.conf.js"
+  },
+  "author": "c10ckw0rk",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-verbose-reporter": "0.0.3",
+    "phantomjs-prebuilt": "^2.1.14"
+  }
+}
