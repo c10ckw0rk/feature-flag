@@ -1,5 +1,5 @@
 {
-  "name": "feature-flag",
+  "name": "feature-flagons",
   "version": "1.0.0",
   "description": "Simple script that loads different js and css based on a percentage.",
   "main": "app/index.js",
