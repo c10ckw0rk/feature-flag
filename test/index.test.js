@@ -26,6 +26,8 @@ describe('Feature Flag loads different css and js files', () => {
             }
         });
 
+        window.featureFlag.start();
+
     });
 
     afterEach(() => {
@@ -81,6 +83,8 @@ describe('Feature Flag loads different css and js files', () => {
                     }
                 }
             });
+
+            window.featureFlag.start();
 
             const date = new Date(window.featureFlag.readStorage().time).getSeconds();
             const date2 = new Date().getSeconds();
@@ -139,9 +143,60 @@ describe('Feature Flag loads different css and js files', () => {
             }
         });
 
+        window.featureFlag.start();
+
         const afterPath = window.featureFlag.readStorage().css;
 
         expect(beforePath).not.toBe(afterPath);
+
+    });
+
+    it('if percentage changes it only pulls from the listed pool', () => {
+
+        const test = () => {
+
+            window.featureFlag.cleanUp();
+
+            window.featureFlag = new FF('test-feature', {
+                variants: {
+                    default: {
+                        css: '/base/test/mocks/default.css',
+                        js: '/base/test/mocks/default.js',
+                        percent: 0.5
+                    },
+                    one: {
+                        css: '/base/test/mocks/one.css',
+                        js: '/base/test/mocks/one.js',
+                        percent: 0.5
+                    }
+                }
+            });
+
+            window.featureFlag.setStorage('one');
+
+            window.featureFlag = new FF('test-feature', {
+                variants: {
+                    default: {
+                        css: '/base/test/mocks/default.css',
+                        js: '/base/test/mocks/default.js',
+                        percent: 1
+                    },
+                    one: {
+                        css: '/base/test/mocks/one.css',
+                        js: '/base/test/mocks/one.js',
+                        percent: 0
+                    }
+                },
+                pullFrom: ['default']
+            });
+
+            window.featureFlag.start();
+
+            return window.featureFlag.readStorage().name === 'one';
+
+        };
+
+        expect(test()).toBe(true);
 
     });
 
