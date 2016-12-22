@@ -1,6 +1,6 @@
 {
   "name": "feature-flagons",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple script that loads different js and css based on a percentage.",
   "main": "app/index.js",
   "scripts": {
