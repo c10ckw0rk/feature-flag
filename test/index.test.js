@@ -200,4 +200,116 @@ describe('Feature Flag loads different css and js files', () => {
 
     });
 
+    it('if condition is false styles and javascript are not added', () => {
+
+        window.featureFlag.cleanUp();
+
+        window.featureFlag = new FF('test-feature', {
+            variants: {
+                default: {
+                    css: '/base/test/mocks/default.css',
+                    js: '/base/test/mocks/default.js',
+                    percent: 1
+                },
+                one: {
+                    css: '/base/test/mocks/one.css',
+                    js: '/base/test/mocks/one.js',
+                    percent: 0
+                }
+            },
+            pullFrom: ['default'],
+            condition: false
+        });
+
+        window.featureFlag.start();
+
+        expect(document.querySelector('link[data-feature-flag]')).toBeNull();
+
+    });
+
+    it('if the function condition is false styles and javascript are not added', () => {
+
+        window.featureFlag.cleanUp();
+
+        window.featureFlag = new FF('test-feature', {
+            variants: {
+                default: {
+                    css: '/base/test/mocks/default.css',
+                    js: '/base/test/mocks/default.js',
+                    percent: 1
+                },
+                one: {
+                    css: '/base/test/mocks/one.css',
+                    js: '/base/test/mocks/one.js',
+                    percent: 0
+                }
+            },
+            pullFrom: ['default'],
+            condition: () => {
+                return false;
+            }
+        });
+
+        window.featureFlag.start();
+
+        expect(document.querySelector('link[data-feature-flag]')).toBeNull();
+
+    });
+
+    it('if the function condition is true styles and javascript are added', () => {
+
+        window.featureFlag.cleanUp();
+
+        window.featureFlag = new FF('test-feature', {
+            variants: {
+                default: {
+                    css: '/base/test/mocks/default.css',
+                    js: '/base/test/mocks/default.js',
+                    percent: 1
+                },
+                one: {
+                    css: '/base/test/mocks/one.css',
+                    js: '/base/test/mocks/one.js',
+                    percent: 0
+                }
+            },
+            pullFrom: ['default'],
+            condition: () => {
+                return true;
+            }
+        });
+
+        window.featureFlag.start();
+
+        expect(document.querySelector('link[data-feature-flag]')).not.toBeNull();
+
+    });
+
+    it('if the condition is true styles and javascript are added', () => {
+
+        window.featureFlag.cleanUp();
+
+        window.featureFlag = new FF('test-feature', {
+            variants: {
+                default: {
+                    css: '/base/test/mocks/default.css',
+                    js: '/base/test/mocks/default.js',
+                    percent: 1
+                },
+                one: {
+                    css: '/base/test/mocks/one.css',
+                    js: '/base/test/mocks/one.js',
+                    percent: 0
+                }
+            },
+            pullFrom: ['default'],
+            condition: true
+        });
+
+        window.featureFlag.start();
+
+        expect(document.querySelector('link[data-feature-flag]')).not.toBeNull();
+
+    });
+
 });
