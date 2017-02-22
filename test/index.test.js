@@ -312,4 +312,59 @@ describe('Feature Flag loads different css and js files', () => {
 
     });
 
+    it('if force, percentage is overided', () => {
+
+        window.featureFlag.cleanUp();
+
+        window.featureFlag = new FF('test-feature', {
+            variants: {
+                default: {
+                    css: '/base/test/mocks/default.css',
+                    js: '/base/test/mocks/default.js',
+                    percent: 1
+                },
+                one: {
+                    css: '/base/test/mocks/one.css',
+                    js: '/base/test/mocks/one.js',
+                    percent: 0
+                }
+            },
+            pullFrom: ['default'],
+            condition: true,
+            force: 'one'
+        });
+
+        window.featureFlag.start();
+
+        expect(document.querySelector('link[data-feature-flag]').getAttribute('href')).toBe('/base/test/mocks/one.css');
+
+    });
+
+    it('if no force, it works normally', () => {
+
+        window.featureFlag.cleanUp();
+
+        window.featureFlag = new FF('test-feature', {
+            variants: {
+                default: {
+                    css: '/base/test/mocks/default.css',
+                    js: '/base/test/mocks/default.js',
+                    percent: 0
+                },
+                one: {
+                    css: '/base/test/mocks/one.css',
+                    js: '/base/test/mocks/one.js',
+                    percent: 1
+                }
+            },
+            pullFrom: ['default'],
+            condition: true
+        });
+
+        window.featureFlag.start();
+
+        expect(document.querySelector('link[data-feature-flag]').getAttribute('href')).toBe('/base/test/mocks/one.css');
+
+    });
+
 });
