@@ -1,6 +1,6 @@
 {
   "name": "feature-flagons",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Simple script that loads different js and css based on a percentage.",
   "main": "lib/FeatureFlagons.js",
   "scripts": {
